@@ -1,6 +1,7 @@
 "use strict";
 console.log('Hello from external JavaScript');
 alert("Welcome to my website!");
+
 var user_favorite_color = prompt("What is your favorite color?");
 alert("Great! " + user_favorite_color + " is my favorite color too!");
 
@@ -45,3 +46,17 @@ if(items_in_cart <= 2 && current_date < expiration_date || membership == true){
 else{
     alert("The promotion cannot be applied at this time.")
 }
+
+var username = 'codeup';
+var password = 'notastrongpassword';
+
+var five_char = password.length >= 5;
+var pass_contains_username = !password.includes(username);
+var user_20char = username.length <= 20;
+var both_whitespace = password === password.trim() && username === username.trim();
+
+console.log(five_char)
+console.log(pass_contains_username)
+console.log(user_20char)
+console.log(both_whitespace)
+
