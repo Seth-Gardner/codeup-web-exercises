@@ -50,12 +50,7 @@ var random = Math.floor((Math.random() * 3) + 1);
  * number)
  */
 function isTwo(number){
-    if(number / 2 === 1){
-        return true
-    }
-    else{
-        return false
-    }
+    return  number ==2;
 }
 console.log(isTwo(random))
 /**
@@ -99,4 +94,4 @@ alert("Your tip should be $" + calculateTip(percent, total))
 function applyDiscount(num1, num2){
     return num1 - (num1 * num2)
 }
-console.log("Your final price is $" + applyDiscount(46, .15))
+console.log("Your final price is $" + applyDiscount(45.99, .12));
