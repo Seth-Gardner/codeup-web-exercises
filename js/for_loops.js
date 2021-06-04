@@ -12,9 +12,18 @@ var randomNumber = function(){
         console.log(x + isEven)
     }
 }
-
-
+var pyramidOfNumbers = function() {
+    for(let i = 1; i < 10; i++){
+        console.log(i.toString().repeat(i))
+    }
+}
+var idk = function(){
+    for(let i = 100; i > 0; i = i - 5){
+        console.log(i)
+    }
+}
 
 showMultiplicationTable()
 randomNumber()
-
+pyramidOfNumbers()
+idk()
