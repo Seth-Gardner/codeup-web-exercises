@@ -29,4 +29,4 @@ do{
     } else{ console.log("Cannot sell you " + conesBought + " I only have " + coneTotal)}
 } while(coneTotal > 0);
 console.log("Yay! I sold them all")
-//this was the easy one suprisingly, but i did have a hard time with the first one
+//this was the easy one suprisingly, but i did have a hard time
