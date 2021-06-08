@@ -11,7 +11,13 @@
      *  > console.log(person.firstName) // "Rick"
      *  > console.log(person.lastName) // "Sanchez"
      */
-
+    var person = {
+        firstName: "Seth",
+        lastName: "Gardner",
+        sayHello: function() {
+            return "Hello, " + this.firstName + " " + this.lastName
+        }
+    }
     /**
      * TODO:
      * Add a sayHello method to the person object that returns a greeting using
@@ -21,7 +27,7 @@
      * Example
      * > console.log(person.sayHello()) // "Hello from Rick Sanchez!"
      */
-
+    console.log(person.sayHello())
     /** TODO:
      * HEB has an offer for the shoppers that buy products amounting to
      * more than $200. If a shopper spends more than $200, they get a 12%
@@ -36,12 +42,19 @@
      * and console.log the relevant messages for each person
      */
 
-    // var shoppers = [
-    //     {name: 'Cameron', amount: 180},
-    //     {name: 'Ryan', amount: 250},
-    //     {name: 'George', amount: 320}
-    // ];
-
+     var shoppers = [
+         {name: 'Cameron', amount: 180},
+         {name: 'Ryan', amount: 250},
+         {name: 'George', amount: 320}
+     ];
+     function myFunction(obj, ind){
+             if(obj.amount > 200){
+                 console.log(obj.name + " will receive a discount, their remaining total is $" + (obj.amount - (obj.amount * .12)))
+             } else if(obj.amount <= 200){
+                 console.log(obj.name + " will not receive a discount, their total is $" + obj.amount)
+             }
+     }
+    shoppers.forEach(myFunction)
     /** TODO:
      * Create an array of objects that represent books and store it in a
      * variable named `books`. Each object should have a title and an author
@@ -54,7 +67,13 @@
      * > console.log(books[0].author.firstName) // "Douglas"
      * > console.log(books[0].author.lastName) // "Adams"
      */
-
+    var books = [
+        {title: '11/22/63', author: "Stephen King"},
+        {title: "The Grapes of Wrath", author: 'John Steinbeck'},
+        {title: '1984', author: "George Orwell"},
+        {title: "Prisoner of Azkaban", author: "J.K. Rowling"},
+        {title: "The Quran", author: "Muhammed"}
+    ]
     /**
      * TODO:
      * Loop through the books array and output the following information about
@@ -79,7 +98,10 @@
      *      ---
      *      ...
      */
-
+    function bookPrint(obj, ind){
+        console.log("Book # " + ind + "\n" + "Title: " + obj.title + "\n" + "Author: " + obj.author )
+    }
+    books.forEach(bookPrint)
     /**
      * Bonus:
      * - Create a function named `createBook` that accepts a title and author
