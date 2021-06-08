@@ -99,9 +99,8 @@
      *      ...
      */
     function bookPrint(obj, ind){
-        console.log("Book # " + ind + "\n" + "Title: " + obj.title + "\n" + "Author: " + obj.author )
+        console.log("Book # " + (ind + 1) + "\n" + "Title: " + obj.title + "\n" + "Author: " + obj.author )
     }
-    books.forEach(bookPrint)
     /**
      * Bonus:
      * - Create a function named `createBook` that accepts a title and author
@@ -112,5 +111,9 @@
      *   outputs the information described above. Refactor your loop to use your
      *   `showBookInfo` function.
      */
-
+    function createBook(newTitle, newAuthor){
+        books.push({title: newTitle, author: newAuthor})
+    }
+    createBook("The Anthropocene Reviewed", "John Green")
+    books.forEach(bookPrint)
 })();
