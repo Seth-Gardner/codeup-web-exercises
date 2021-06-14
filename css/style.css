@@ -1,0 +1,12 @@
+.fancy-header {
+    color: lightslategray; /* single line comment */
+    text-decoration: underline;
+    text-align: center;
+}
+
+ul {
+    list-style-type: square;
+}
+html {
+    font-family: "Lucida Grande";
+}
