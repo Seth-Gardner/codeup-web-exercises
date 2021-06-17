@@ -1,0 +1,43 @@
+.top-nav {
+    background: lightgray;
+    position: fixed;
+    z-index: 3;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: flex-start;
+    margin: .75em 0;
+    font-family: 'Montserrat', sans-serif;
+}
+.nav-item {
+
+}
+.nav-item a {
+    display: block;
+    padding: 0 .75em;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+a:hover{
+    color: blue;
+}
+h1 {
+    float: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    padding: .2em 0;
+    font-family: 'Montserrat', sans-serif;
+
+}
