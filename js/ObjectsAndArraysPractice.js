@@ -165,3 +165,4 @@ numberInfo(0);
         isEven: true,
     isZero: true
 }
+console.log("i am working");
