@@ -48,10 +48,11 @@ var personOne = {
     lastName: "floopertan",
     ageInYears: 34,
     heightInInches: 65,
-    getFullName: function() {
-        return this.firstName + ' ' + this.lastName;
+    getFullName: function () {
+        return this.firstName + " " + this.lastName
     }
 }
+
 console.log(personOne.getFullName())
 // TODO: Create a method on the object down below named getNicelyFormattedFullName that when called returns the
 //  users full name with both first letters in the names being capitalized look at example down below for more reference.
@@ -78,3 +79,43 @@ var personThree = {
     }
 }
 console.log(personThree.helloMessage())
+
+// July 8th 2021
+// Part 1
+// TODO: Create a function that takes an array of strings and returns an array of objects
+//  where each object has 2 properties: originalString and countOfLetters
+function strToArr(arr) {
+    let objArr = [];
+    for (let i = 0; i < arr.length; i++){
+        objArr.push({originalString: arr[i], lengthOfOriginalString: arr[i].length})
+    }
+    return objArr
+}
+console.log(strToArr(['hello', 'dave']))
+// Example: input: ["hello", "dave"]
+//          returns: [
+//                    { "originalString":"hello", lengthOfOriginalString:5 },
+//                    { "originalString":"dave", lengthOfOriginalString:4 }
+//                   ]
+// Part 2
+// TODO: Create a function that takes the array of objects from PART 1
+//  and returns a string of all of the originalStrings concatenated with spaces in between
+function objToStr(obj) {
+    let newStr = ''
+    for(let i = 0; i < obj.length; i++){
+        newStr += obj[i].originalString + ' '
+    }
+    return newStr
+}
+console.log(objToStr(strToArr(['hello', 'dave'])))
+// Example: input: [
+//                    { "originalString":"hello", lengthOfOriginalString:5 },
+//                    { "originalString":"dave", lengthOfOriginalString:4 }
+//                  ]
+//          returns: "hello dave"
+// TODO: Create a function named getTallUsers that accepts an array of objects. The objects in the array will be in the same format
+//  as PersonOne, PersonTwo, and PersonThree. The functions job is to return an array of users that have heightInInches equal to or greater than 65.
+var people = [personOne,personTwo,personThree];
+// Example: getTallUsers(people)
+// ---- returns ----> [{firstName: "silvia", lastName: "floopertan", ageInYears: 34, heightInInches: 65},
+//
