@@ -1675,7 +1675,7 @@ function mostSpentOnItem(obj){
     let mostSpent = {
         title: "default",
         price: 0,
-        quantity: 0
+        quantity: 0,
     }
     for(let i=0;i<obj.items.length;i++) {
         if((obj.items[i].price * obj.items[i].quantity) > (mostSpent.price * mostSpent.quantity)) {

@@ -6,18 +6,23 @@
 </head>
 <body>
 
-<h1>I am a title</h1>
-<p>im underneath the title and im not proud of it</p>
+<h1 class="codeup">I am a title</h1>
+<p id="bottom" class="codeup">im underneath the title and im not proud of it</p>
 <ul>
     <li>i am a one</li>
     <li>i am a two</li>
 </ul>
-<div>
+<div class="codeup" id="new-div">
     im your favourite element
 </div>
 <script src="jquery/jquery.js"></script>
 <script> $(document).ready(function() {
-    // alert( 'The DOM has finished loading!' );
+    // let contents = $('h1').html();
+    // alert(contents);
+    // $('.codeup').css('border', '1px solid red')
+    // $('li').css('font-size', '20px')
+    // $('h1, p, li').css('background-color', '#f1e740')
+
 });</script>
 </body>
 </html>
