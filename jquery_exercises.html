@@ -22,7 +22,21 @@
     // $('.codeup').css('border', '1px solid red')
     // $('li').css('font-size', '20px')
     // $('h1, p, li').css('background-color', '#f1e740')
-
-});</script>
+    $('h1').click(function() {
+        $(this).css('color', "red")
+    });
+    $('p').dblclick(function() {
+        $(this).css('font-size', '18px')
+    })
+    $('li').hover(
+        function() {
+            $(this).css('color', 'red')
+    },
+    function() {
+            $(this).css('color', 'black')
+    }
+    );
+});
+</script>
 </body>
 </html>
