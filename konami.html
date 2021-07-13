@@ -12,12 +12,15 @@
   let input = []
   $(document).keyup(function(event){
     input.push((event.keyCode));
-    let mySound;
     if(input.join('').includes('3838404037393739656613')){
       input = []
       let audio = new Audio('sounds/139-item-catch.mp3');
       audio.play();
       alert('You have added 30 lives!');
+      $('body').css('background-image', 'url(https://images.alphacoders.com/789/thumb-1920-789452.jpg)').css('background-size', '100%')
+
+
+
     }
   });
 </script>

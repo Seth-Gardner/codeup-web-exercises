@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/jquery_faq.css">
+</head>
+<body>
+
+<dl>
+  <dt>How big are all of the National Parks?</dt>
+  <dd class="invisible">All of the Parks combined are 52.2 million acres, or 81,250 square miles. Thats almost the size of Romania!</dd>
+
+  <dt>Can you hunt in National Parks?</dt>
+  <dd class="invisible">As general rule, no. There are some exceptions though, for example Native populations in
+  Alaska still hunt whale and seal as their main sources of food.</dd>
+
+  <dt>What is the biggest National Park?</dt>
+  <dd class="invisible">Wrangell-St. Elias National Park</dd>
+
+  <dt>How many geysers are in YellowStone?</dt>
+  <dd class="invisible">There are 500 geysers in Yellowstone, but there are more than 10,000 hydrothermal features
+  scattered throughout the park.</dd>
+
+  <dt>Where is the Yellowstone super Volcano inside the park?</dt>
+  <dd class="invisible">The entire park is located on top of volcano. Every step you take inside Yellowstone is on top of
+  the volcano.</dd>
+
+  <dt>What is Seth's favorite National Park?</dt>
+  <dd class="invisible">It is Grand Teton National park.</dd>
+</dl>
+
+<script src="jquery/jquery.js"></script>
+<script>
+
+  $('document').ready(function() {
+    // $('.invisible').css('visibility', 'hidden')
+    $('dt').click(function(event) {
+      event.preventDefault();
+      $('dd').toggleClass('invisible')
+    })
+    $()
+  })
+
+</script>
+</body>
+</html>
