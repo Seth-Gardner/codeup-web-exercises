@@ -16,7 +16,8 @@
   </thead>
   <tbody id="insertProducts"></tbody>
 </table>
-
+<br>
+<button id="refresh">Refresh page</button>
 <script src="jquery/jquery.js"></script>
 <script>
   (function() {
@@ -26,8 +27,14 @@
             .done(function (data, status, jqXhr) {
               console.log(data)
               for (let i = 0; i < data.length; i++) {
-                $('#insertProducts').append("<tr> <th>" + data[i].title + "</th> <th>" + data[i].quantity + "</th> <th>" + data[i].price + "</th> <th>" + data[i] + "</th> </tr>")
+                let item = data[i]
+                let newCat = ""
+                for(let k=0;k<item.categories.length; k++){ newCat += " " + item.categories[k]}
+                $('#insertProducts').append("<tr> <th>" + item.title + "</th> <th>" + item.quantity + "</th> <th>" + item.price + "</th> <th>" + newCat + "</th> </tr>")
               }
+              $('#refresh').click(function () {
+                location.reload()
+              })
             })
     // TODO: Take the data from inventory.json and append it to the products table
     //       HINT: Your data should come back as a JSON object; use console.log() to inspect
