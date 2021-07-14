@@ -15,7 +15,7 @@
         $.ajax('data/blog.json', {type: "GET", dataType: "json"})
             .done(function (data, status, jqXhr) {
                 for (let i = 0; i < data.length; i++) {
-                    $('#posts').append("<p>" + data[i].title + "</p> <p>" + data[i].content + "</p> <p>" + data[i].date + "</p>")
+                    $('#posts').append("<p>" + data[i].title + "</p> <p>" + data[i].content + "</p> <p>" + data[i].date + "</p> <br>")
                 }
             })
     })
