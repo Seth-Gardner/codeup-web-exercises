@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax</title>
+</head>
+<body>
+
+<h1>Ajax Requests</h1>
+
+<script src="jquery/jquery.js"></script>
+<script>
+  'use strict';
+  $('document').ready(function() {
+      $.ajax('data/stuff.json')
+          .done(function(data, status, jqXhr) {
+          alert("Ajax completed successfully");
+          console.log('request status: ' + status)
+          console.log('Data returned from server: ')
+          console.log(data)
+      })
+          .fail(function(jqXhr, status, error){
+              console.log("There was an error, check console for details")
+              console.log("Response status: " + status);
+              console.log(error)
+          }).always(function() {
+          alert("ajax request has finished")
+      });
+
+      $.ajax('')
+          .done(function(data, status, jqXhr) {
+          alert("Ajax completed successfully");
+          console.log('request status: ' + status)
+          console.log('Data returned from server: ')
+          console.log(data)
+      })
+      .fail(function(jqXhr, status, error){
+          console.log("There was an error, check console for details")
+          console.log("Response status: " + status);
+          console.log(error)
+      }).always(function() {
+          alert("ajax request has finished")
+      });
+  });
+
+</script>
+</body>
+</html>
