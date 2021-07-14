@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <div id="posts">
+
+  </div>
+
+  <script src="jquery/jquery.js"></script>
+  <script>
+    $('document').ready(function () {
+        $.ajax('data/blog.json', {type: "GET", dataType: "json"})
+            .done(function (data, status, jqXhr) {
+                for (let i = 0; i < data.length; i++) {
+                    $('#posts').append("<p>" + data[i].title + "</p> <p>" + data[i].content + "</p> <p>" + data[i].date + "</p>")
+                }
+            })
+    })
+  </script>
+</body>
+</html>
