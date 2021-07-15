@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>First Mapbox Map</title>
+  <!-- Mapbox CSS -->
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
+  <!-- Custom CSS -->
+  <style>
+    #map {
+      /* the width and height may be set to any size */
+      width: 100%;
+      height: 700px;
+    }
+  </style>
+</head>
+<body>
+
+
+<!-- The HTML element that serves as the Mapbox container -->
+<div id='map'></div>
+
+<!-- Mapbox JS -->
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
+<script src="js/keys.js"></script>
+<!-- Custom JS -->
+<script>
+  mapboxgl.accessToken = mapboxAPIKey;
+  var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v9',
+    zoom: 12,
+    center: [-98.32833690753364, 29.56030438787703]
+  });
+  var dumbArray = [{
+    coordinates: [-98.32833690753364, 29.56030438787703],
+    description: '<strong>Bangkok Cuisine</strong>'
+    },
+    {
+      coordinates: [-98.32409006209278, 29.57690086786815],
+      description: '<strong>Pasha Mediterranean grill</strong>'
+    },
+    {
+      coordinates: [-98.32601748787373, 29.565556023026343],
+      description: '<strong>Kobe Teppan & Sushi</strong>'
+    }
+  ];
+  dumbArray.forEach(function (obj){
+    let marker = new mapboxgl.Marker()
+            .setLngLat(obj.coordinates)
+            .addTo(map);
+
+  });
+
+
+
+
+</script>
+</body>
+</html>

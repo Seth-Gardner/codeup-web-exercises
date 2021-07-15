@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>First Mapbox Map</title>
+  <!-- Mapbox CSS -->
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
+  <!-- Custom CSS -->
+  <style>
+    #map {
+      /* the width and height may be set to any size */
+      width: 100%;
+      height: 700px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>My First Mapbox Map!</h1>
+
+<!-- The HTML element that serves as the Mapbox container -->
+<div id='map'></div>
+
+<!-- Mapbox JS -->
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
+<script src="js/keys.js"></script>
+<!-- Custom JS -->
+<script>
+  mapboxgl.accessToken = mapboxAPIKey;
+  var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: [-98.32833690753364, 29.56030438787703],
+    zoom: 12
+  });
+  map.on('load', function () {
+    map.addSource('places', {
+// This GeoJSON contains features that include an "icon"
+// property. The value of the "icon" property corresponds
+// to an image in the Mapbox Streets style's sprite.
+      'type': 'geojson',
+      'data': {
+        'type': 'FeatureCollection',
+        'features': [
+          {
+            'type': 'Feature',
+            'properties': {
+              'description':
+                        '<strong>Bangkok Cuisine</strong>',
+              'icon': 'restaurant-15'
+            },
+            'geometry': {
+              'type': 'Point',
+              'coordinates': [-98.32833690753364, 29.56030438787703]
+            }
+          },
+          {
+            'type': 'Feature',
+            'properties': {
+              'description':
+                      '<strong>Pasha Mediterranean grill</strong>',
+              'icon': 'restaurant-15'
+            },
+            'geometry': {
+              'type': 'Point',
+              'coordinates': [-98.32409006209278, 29.57690086786815]
+            }
+          },
+          {
+            'type': 'Feature',
+            'properties': {
+              'description':
+                      '<strong>Kobe Teppan & Sushi</strong>',
+              'icon': 'restaurant-15'
+            },
+            'geometry': {
+              'type': 'Point',
+              'coordinates': [-98.32601748787373, 29.565556023026343]
+            }
+          },
+
+        ]
+      }
+    });
+// Add a layer showing the places.
+    map.addLayer({
+      'id': 'places',
+      'type': 'symbol',
+      'source': 'places',
+      'layout': {
+        'icon-image': '{icon}',
+        'icon-allow-overlap': true,
+        'icon-size': 1.75
+      }
+    });
+
+// When a click event occurs on a feature in the places layer, open a popup at the
+// location of the feature, with description HTML from its properties.
+    map.on('click', 'places', function (e) {
+      console.log(e)
+      var coordinates = e.features[0].geometry.coordinates.slice();
+      var description = e.features[0].properties.description;
+
+// Ensure that if the map is zoomed out such that multiple
+// copies of the feature are visible, the popup appears
+// over the copy being pointed to.
+      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+      }
+
+      new mapboxgl.Popup()
+              .setLngLat(coordinates)
+              .setHTML(description)
+              .addTo(map);
+    });
+
+// Change the cursor to a pointer when the mouse is over the places layer.
+    map.on('mouseenter', 'places', function () {
+      map.getCanvas().style.cursor = 'pointer';
+    });
+
+// Change it back to a pointer when it leaves.
+    map.on('mouseleave', 'places', function () {
+      map.getCanvas().style.cursor = '';
+    });
+  });
+
+  function geocode(search, token) {
+    var baseUrl = 'https://api.mapbox.com';
+    var endPoint = '/geocoding/v5/mapbox.places/';
+    return fetch(baseUrl + endPoint + encodeURIComponent(search) + '.json' + "?" + 'access_token=' + token)
+            .then(function(res) {
+              return res.json();
+              // to get all the data from the request, comment out the following three lines...
+            }).then(function(data) {
+              return data.features[0].center;
+            });
+  }
+
+  map.addControl(
+          new MapboxGeocoder({
+            accessToken: mapboxAPIKey,
+            mapboxgl: mapboxgl
+          })
+  );
+
+  function findByAddress(searchTerm) {
+
+    geocode(searchTerm, mapboxAPIKey).then(function (alamoCoordinates) {
+      console.log(`Here are the coordinates for the following location ${searchTerm}`)
+      console.log(alamoCoordinates)
+
+      var alamoMarker = new mapboxgl.Marker()
+              .setLngLat(alamoCoordinates)
+              .addTo(map);
+
+      var alamoPopup = new mapboxgl.Popup()
+              // .setLngLat([-98.45251678925071,29.567244316609294])
+              .setHTML("<p>The Alamo</p>")
+              // .setMaxWidth("100px")
+              .addTo(map)
+
+      alamoMarker.setPopup(alamoPopup)
+
+    })
+  }
+</script>
+</body>
+</html>
