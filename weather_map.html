@@ -9,7 +9,13 @@
 <script src="js/keys.js"></script>
 <script>
   $(document).ready(function(){
-
+      $.get(`https://api.openweathermap.org/data/2.5/weather`, {
+          APPID: openweatherAPIKey,
+          q:     "San Antonio, US",
+          units: "imperial"
+      }).done(function(data) {
+          console.log(data);
+      });
 
 
   });
