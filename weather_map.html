@@ -3,21 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <title>Weather Map</title>
+    <link rel="stylesheet" href="css/weather_map.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
+
 </head>
 <body>
-<script src="jquery/jquery.js"></script>
+
+    <nav class="navbar bg-dark" id="nav-bar">
+        <div class="container-fluid">
+            <a class="nav-word p-0" href="#">
+                <div id="title">Weather App</div>
+            </a>
+            <div class="d-flex nav-word" id="city-text">Current City: San Antonio</div>
+
+        </div>
+    </nav>
+    <div class="overridden">.</div>
+
+    <div class="row card-text overridden m-0 pb-2" style="max-width: 100%">
+        <div class="col ml-3">
+            <div class="card text-center " style="background-color: #677078">
+                <div class="card-header bg-dark" style="color: #c3d0dc">
+                    Date
+                </div>
+                <div class="card-">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" id="list">75.75 / 82.80 <br> picture</li>
+                        <li class="list-group-item text-left" id="list">Description: <strong>Overcast</strong></li>
+                        <li class="list-group-item text-left" id="list">Humidity: <strong>71</strong></li>
+                        <li class="list-group-item text-left" id="list">Wind: <strong>5.85</strong></li>
+                        <li class="list-group-item text-left" id="list">Pressure: <strong>5.85</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card text-center " style="background-color: #677078">
+                <div class="card-header bg-dark" style="color: #c3d0dc">
+                    Date
+                </div>
+                <div class="card-">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" id="list">75.75 / 82.80 <br> picture</li>
+                        <li class="list-group-item text-left" id="list">Description: <strong>Overcast</strong></li>
+                        <li class="list-group-item text-left" id="list">Humidity: <strong>71</strong></li>
+                        <li class="list-group-item text-left" id="list">Wind: <strong>5.85</strong></li>
+                        <li class="list-group-item text-left" id="list">Pressure: <strong>5.85</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card text-center " style="background-color: #677078">
+                <div class="card-header bg-dark" style="color: #c3d0dc">
+                    Date
+                </div>
+                <div class="card-">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" id="list">75.75 / 82.80 <br> picture</li>
+                        <li class="list-group-item text-left" id="list">Description: <strong>Overcast</strong></li>
+                        <li class="list-group-item text-left" id="list">Humidity: <strong>71</strong></li>
+                        <li class="list-group-item text-left" id="list">Wind: <strong>5.85</strong></li>
+                        <li class="list-group-item text-left" id="list">Pressure: <strong>5.85</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card text-center " style="background-color: #677078">
+                <div class="card-header bg-dark" style="color: #c3d0dc">
+                    Date
+                </div>
+                <div class="">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" id="list">75.75 / 82.80 <br> picture</li>
+                        <li class="list-group-item text-left" id="list">Description: <strong>Overcast</strong></li>
+                        <li class="list-group-item text-left" id="list">Humidity: <strong>71</strong></li>
+                        <li class="list-group-item text-left" id="list">Wind: <strong>5.85</strong></li>
+                        <li class="list-group-item text-left" id="list">Pressure: <strong>5.85</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card text-center mr-3" style="background-color: #677078">
+                <div class="card-header bg-dark" style="color: #c3d0dc">
+                    Date
+                </div>
+                <div class="">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" id="list">75.75 / 82.80 <br> picture</li>
+                        <li class="list-group-item text-left" id="list" >Description: <strong>Overcast</strong></li>
+                        <li class="list-group-item text-left" id="list" >Humidity: <strong>71</strong></li>
+                        <li class="list-group-item text-left" id="list">Wind: <strong>5.85</strong></li>
+                        <li class="list-group-item text-left" id="list">Pressure: <strong>5.85</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id='map' style='width: 100%; height: 400px;'></div>
+
+
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css" type="text/css">
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+    <script src="jquery/jquery.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 <script src="js/keys.js"></script>
 <script>
   $(document).ready(function(){
       $.get(`https://api.openweathermap.org/data/2.5/weather`, {
           APPID: openweatherAPIKey,
-          q:     "San Antonio, US",
+          q:"Anchorage, US",
           units: "imperial"
       }).done(function(data) {
           console.log(data);
       });
 
-
+      mapboxgl.accessToken = mapboxAPIKey;
+      var map = new mapboxgl.Map({
+          container: 'map',
+              style: 'mapbox://styles/mapbox/dark-v10',
+          zoom: 10,
+          center: [-98.4916, 29.4252]
+      });
+      map.addControl(
+          new MapboxGeocoder({
+              accessToken: mapboxgl.accessToken,
+              mapboxgl: mapboxgl
+          })
+      );
   });
 </script>
 </body>

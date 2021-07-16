@@ -1,0 +1,31 @@
+html {
+    background-color: #1e2328;
+}
+.overridden {
+    background-color: #343333;
+}
+.word{
+    color: #acbac7;
+}
+.nav-word {
+    color: #c3d0dc
+}
+#title {
+    font-size: 25px;
+}
+#city-text {
+    font-size: 13px;
+}
+#nav-bar {
+    background-color: #2d333b;
+}
+.card-text{
+    font-size: 12px;
+}
+.card-background {
+    background-color: #2d333b;
+}
+#list {
+    background-color: #677078;
+    color: #c3d0dc
+}
