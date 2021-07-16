@@ -17,10 +17,16 @@
             <a class="nav-word p-0" href="#">
                 <div id="title">Weather App</div>
             </a>
-            <div class="d-flex nav-word" id="city-text">Current City: San Antonio</div>
+            <div class="d-flex nav-word" id="city-text">Current City: <p id="currentCity">San Antonio</p></div>
 
         </div>
     </nav>
+    <div class="overridden">.</div>
+    <div class="d-flex align-items-center overridden">
+        <div class="mx-3 word">Place</div>
+        <input class="form-control form-control-sm mx-3" type="text" placeholder="City, State" style="max-width: 10%; background-color: #1f232b;" id="input">
+        <button type="button" class="btn btn-secondary btn-sm" id="find-button">Find</button>
+    </div>
     <div class="overridden">.</div>
 
     <div class="row card-text overridden m-0 pb-2" style="max-width: 100%">
@@ -108,8 +114,6 @@
     <div id='map' style='width: 100%; height: 400px;'></div>
 
 
-    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
-    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css" type="text/css">
     <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
     <script src="jquery/jquery.js"></script>
@@ -117,6 +121,7 @@
 <script src="js/keys.js"></script>
 <script>
   $(document).ready(function(){
+      var coordinate2 = [-98.4916, 29.4252]
       $.get(`https://api.openweathermap.org/data/2.5/weather`, {
           APPID: openweatherAPIKey,
           q:"Anchorage, US",
@@ -130,14 +135,34 @@
           container: 'map',
               style: 'mapbox://styles/mapbox/dark-v10',
           zoom: 10,
-          center: [-98.4916, 29.4252]
+          center: coordinate2
       });
-      map.addControl(
-          new MapboxGeocoder({
-              accessToken: mapboxgl.accessToken,
-              mapboxgl: mapboxgl
-          })
-      );
+      function geocode(search, token) {
+          var baseUrl = 'https://api.mapbox.com';
+          var endPoint = '/geocoding/v5/mapbox.places/';
+          return fetch(baseUrl + endPoint + encodeURIComponent(search) + '.json' + "?" + 'access_token=' + token)
+              .then(function(res) {
+                  return res.json();
+                  // to get all the data from the request, comment out the following three lines...
+              }).then(function(data) {
+                  return data.features[0].center;
+              });
+      }
+      var newCity = ""
+      $('#find-button').click(function(){
+          geocode(document.getElementById('input').value, mapboxAPIKey).then(function (value){
+              coordinate2 = value,
+              map.flyTo({
+                  center: [
+                      coordinate2[0],
+                      coordinate2[1]
+                  ],
+                  essential: true // this animation is considered essential with respect to prefers-reduced-motion
+              })
+
+
+          });
+      });
   });
 </script>
 </body>
