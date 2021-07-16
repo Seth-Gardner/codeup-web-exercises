@@ -1,31 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>First Mapbox Map</title>
-  <!-- Mapbox CSS -->
-  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
-  <!-- Custom CSS -->
+  <meta charset="utf-8">
+  <title>Add a geocoder</title>
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js"></script>
   <style>
-    #map {
-      /* the width and height may be set to any size */
-      width: 100%;
-      height: 700px;
-    }
+    body { margin: 0; padding: 0; }
+    #map { position: absolute; top: 0; bottom: 0; width: 100%; }
   </style>
 </head>
 <body>
+<!-- Load the `mapbox-gl-geocoder` plugin. -->
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css" type="text/css">
 
-<h1>My First Mapbox Map!</h1>
+<!-- Promise polyfill script is required -->
+<!-- to use Mapbox GL Geocoder in IE 11. -->
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
 
-<!-- The HTML element that serves as the Mapbox container -->
-<div id='map'></div>
-
-<!-- Mapbox JS -->
-<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
+<div id="map"></div>
 <script src="js/keys.js"></script>
-<!-- Custom JS -->
+
 <script>
+  var dumbArray = [{
+    'type': 'Feature',
+    'properties': {
+      'description':
+              '<strong>Bangkok Cuisine</strong>',
+      'icon': 'restaurant-15'
+    },
+    'geometry': {
+      'type': 'Point',
+      'coordinates': [-98.32833690753364, 29.56030438787703]
+    }
+  },
+  ]
   mapboxgl.accessToken = mapboxAPIKey;
   var map = new mapboxgl.Map({
     container: 'map',
@@ -46,7 +58,7 @@
             'type': 'Feature',
             'properties': {
               'description':
-                        '<strong>Bangkok Cuisine</strong>',
+                      '<strong>Bangkok Cuisine</strong>',
               'icon': 'restaurant-15'
             },
             'geometry': {
@@ -94,10 +106,12 @@
       }
     });
 
+
+
+
 // When a click event occurs on a feature in the places layer, open a popup at the
 // location of the feature, with description HTML from its properties.
     map.on('click', 'places', function (e) {
-      console.log(e)
       var coordinates = e.features[0].geometry.coordinates.slice();
       var description = e.features[0].properties.description;
 
@@ -125,45 +139,18 @@
     });
   });
 
-  function geocode(search, token) {
-    var baseUrl = 'https://api.mapbox.com';
-    var endPoint = '/geocoding/v5/mapbox.places/';
-    return fetch(baseUrl + endPoint + encodeURIComponent(search) + '.json' + "?" + 'access_token=' + token)
-            .then(function(res) {
-              return res.json();
-              // to get all the data from the request, comment out the following three lines...
-            }).then(function(data) {
-              return data.features[0].center;
-            });
-  }
 
+  mapboxgl.accessToken = mapboxAPIKey;
+
+
+  // Add the control to the map.
   map.addControl(
           new MapboxGeocoder({
-            accessToken: mapboxAPIKey,
+            accessToken: mapboxgl.accessToken,
             mapboxgl: mapboxgl
           })
   );
-
-  function findByAddress(searchTerm) {
-
-    geocode(searchTerm, mapboxAPIKey).then(function (alamoCoordinates) {
-      console.log(`Here are the coordinates for the following location ${searchTerm}`)
-      console.log(alamoCoordinates)
-
-      var alamoMarker = new mapboxgl.Marker()
-              .setLngLat(alamoCoordinates)
-              .addTo(map);
-
-      var alamoPopup = new mapboxgl.Popup()
-              // .setLngLat([-98.45251678925071,29.567244316609294])
-              .setHTML("<p>The Alamo</p>")
-              // .setMaxWidth("100px")
-              .addTo(map)
-
-      alamoMarker.setPopup(alamoPopup)
-
-    })
-  }
 </script>
+
 </body>
 </html>

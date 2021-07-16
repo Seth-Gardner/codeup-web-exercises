@@ -95,22 +95,18 @@
       }
     });
 // Add a layer showing the places.
-//     map.addLayer({
-//       'id': 'places',
-//       'type': 'symbol',
-//       'source': 'places',
-//       'layout': {
-//         'icon-image': '{icon}',
-//         'icon-allow-overlap': true,
-//         'icon-size': 1.75
-//       }
-//     });
+    map.addLayer({
+      'id': 'places',
+      'type': 'symbol',
+      'source': 'places',
+      'layout': {
+        'icon-image': '{icon}',
+        'icon-allow-overlap': true,
+        'icon-size': 1.75
+      }
+    });
 
-    dumbArray.forEach(function(obj) {
-      var marker = new mapboxgl.Marker()
-              .setLngLat(obj.geometry.coordinates)
-              .addTo(map);
-    })
+
 
 
 // When a click event occurs on a feature in the places layer, open a popup at the
