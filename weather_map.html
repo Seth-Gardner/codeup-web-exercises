@@ -17,7 +17,7 @@
             <a class="nav-word p-0" href="#">
                 <div id="title">Weather App</div>
             </a>
-            <div class="d-flex nav-word" id="city-text">Current City: <p id="currentCity">San Antonio</p></div>
+            <div class="d-flex nav-word" id="city-text">Current City<p id="currentCity">: San Antonio</p></div>
 
         </div>
     </nav>
@@ -29,87 +29,8 @@
     </div>
     <div class="overridden">.</div>
 
-    <div class="row card-text overridden m-0 pb-2" style="max-width: 100%">
-        <div class="col ml-3">
-            <div class="card text-center " style="background-color: #677078">
-                <div class="card-header bg-dark" style="color: #c3d0dc">
-                    Date
-                </div>
-                <div class="card-">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item" id="list">75.75 / 82.80 <br> picture</li>
-                        <li class="list-group-item text-left" id="list">Description: <strong>Overcast</strong></li>
-                        <li class="list-group-item text-left" id="list">Humidity: <strong>71</strong></li>
-                        <li class="list-group-item text-left" id="list">Wind: <strong>5.85</strong></li>
-                        <li class="list-group-item text-left" id="list">Pressure: <strong>5.85</strong></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card text-center " style="background-color: #677078">
-                <div class="card-header bg-dark" style="color: #c3d0dc">
-                    Date
-                </div>
-                <div class="card-">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item" id="list">75.75 / 82.80 <br> picture</li>
-                        <li class="list-group-item text-left" id="list">Description: <strong>Overcast</strong></li>
-                        <li class="list-group-item text-left" id="list">Humidity: <strong>71</strong></li>
-                        <li class="list-group-item text-left" id="list">Wind: <strong>5.85</strong></li>
-                        <li class="list-group-item text-left" id="list">Pressure: <strong>5.85</strong></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card text-center " style="background-color: #677078">
-                <div class="card-header bg-dark" style="color: #c3d0dc">
-                    Date
-                </div>
-                <div class="card-">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item" id="list">75.75 / 82.80 <br> picture</li>
-                        <li class="list-group-item text-left" id="list">Description: <strong>Overcast</strong></li>
-                        <li class="list-group-item text-left" id="list">Humidity: <strong>71</strong></li>
-                        <li class="list-group-item text-left" id="list">Wind: <strong>5.85</strong></li>
-                        <li class="list-group-item text-left" id="list">Pressure: <strong>5.85</strong></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card text-center " style="background-color: #677078">
-                <div class="card-header bg-dark" style="color: #c3d0dc">
-                    Date
-                </div>
-                <div class="">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item" id="list">75.75 / 82.80 <br> picture</li>
-                        <li class="list-group-item text-left" id="list">Description: <strong>Overcast</strong></li>
-                        <li class="list-group-item text-left" id="list">Humidity: <strong>71</strong></li>
-                        <li class="list-group-item text-left" id="list">Wind: <strong>5.85</strong></li>
-                        <li class="list-group-item text-left" id="list">Pressure: <strong>5.85</strong></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card text-center mr-3" style="background-color: #677078">
-                <div class="card-header bg-dark" style="color: #c3d0dc">
-                    Date
-                </div>
-                <div class="">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item" id="list">75.75 / 82.80 <br> picture</li>
-                        <li class="list-group-item text-left" id="list" >Description: <strong>Overcast</strong></li>
-                        <li class="list-group-item text-left" id="list" >Humidity: <strong>71</strong></li>
-                        <li class="list-group-item text-left" id="list">Wind: <strong>5.85</strong></li>
-                        <li class="list-group-item text-left" id="list">Pressure: <strong>5.85</strong></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+    <div class="row card-text overridden m-0 pb-2" style="max-width: 100%" id="mainDiv">
+
     </div>
     <div id='map' style='width: 100%; height: 400px;'></div>
 
@@ -122,12 +43,32 @@
 <script>
   $(document).ready(function(){
       var coordinate2 = [-98.4916, 29.4252]
-      $.get(`https://api.openweathermap.org/data/2.5/weather`, {
+      $.get(`https://api.openweathermap.org/data/2.5/onecall?`, {
           APPID: openweatherAPIKey,
-          q:"Anchorage, US",
+          lat:coordinate2[1],
+          lon:coordinate2[0],
           units: "imperial"
       }).done(function(data) {
-          console.log(data);
+          for (let i = 0; i < 5; i++) {
+              let day = new Date(data.daily[i].dt * 1000)
+              $('#mainDiv').append(`
+                          <div class="col ml-3">
+                              <div class="card text-center" style="background-color: #677078; ">
+                                  <div class="card-header bg-dark" style="color: #c3d0dc">
+                                      ` + (day.getMonth() + 1) + `/` + day.getDate() + `
+                                  </div>
+                                  <div class="" >
+                                      <ul class="list-group list-group-flush">
+                                          <li class="list-group-item" id="list"> ${data.daily[i].temp.max} / ${data.daily[i].temp.min} <br> <img src="http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png" alt="" style="width: 60px; height: auto"></li>
+                                          <li class="list-group-item text-left" id="list">Description: <strong>${data.daily[i].weather[0].description}</strong></li>
+                                          <li class="list-group-item text-left" id="list">Humidity: <strong>${data.daily[i].humidity}</strong></li>
+                                          <li class="list-group-item text-left" id="list">Wind: <strong>${data.daily[i].wind_speed}</strong></li>
+                                          <li class="list-group-item text-left" id="list">Pressure: <strong>${data.daily[i].pressure}</strong></li>
+                                      </ul>
+                                  </div>
+                              </div>
+                          </div>`)
+          }
       });
 
       mapboxgl.accessToken = mapboxAPIKey;
@@ -151,6 +92,7 @@
       var newCity = ""
       $('#find-button').click(function(){
           geocode(document.getElementById('input').value, mapboxAPIKey).then(function (value){
+              $('#mainDiv').html("")
               coordinate2 = value,
               map.flyTo({
                   center: [
@@ -158,7 +100,39 @@
                       coordinate2[1]
                   ],
                   essential: true // this animation is considered essential with respect to prefers-reduced-motion
-              })
+              });
+              $.get(`https://api.openweathermap.org/data/2.5/onecall?`, {
+                  APPID: openweatherAPIKey,
+                  lat:coordinate2[1],
+                  lon:coordinate2[0],
+                  units: "imperial"
+              }).done(function(data) {
+                  console.log(data)
+                  for (let i = 0; i < 5; i++) {
+                      let day = new Date(data.daily[i].dt * 1000)
+                      $('#mainDiv').append(`
+                          <div class="col ml-3">
+                              <div class="card text-center " style="background-color: #677078;">
+                                  <div class="card-header bg-dark" style="color: #c3d0dc">
+                                      ` + (day.getMonth() + 1) + `/` + day.getDate() + `
+                                  </div>
+                                  <div class="" >
+                                      <ul class="list-group list-group-flush">
+                                          <li class="list-group-item" id="list"> ${data.daily[i].temp.max} / ${data.daily[i].temp.min} <br> <img src="http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png" alt="" style="width: 60px; height: auto"></li>
+                                          <li class="list-group-item text-left" id="list">Description: <strong>${data.daily[i].weather[0].description}</strong></li>
+                                          <li class="list-group-item text-left" id="list">Humidity: <strong>${data.daily[i].humidity}</strong></li>
+                                          <li class="list-group-item text-left" id="list">Wind: <strong>${data.daily[i].wind_speed}</strong></li>
+                                          <li class="list-group-item text-left" id="list">Pressure: <strong>${data.daily[i].pressure}</strong></li>
+                                      </ul>
+                                  </div>
+                              </div>
+                          </div>`)
+                  }
+
+              });
+              newCity = document.getElementById('input').value
+              $('#currentCity').html(": " + newCity)
+
 
 
           });
