@@ -16,3 +16,4 @@ function makeRequest(time) {
         }, time);
     });
 }
+makeRequest(3000)
